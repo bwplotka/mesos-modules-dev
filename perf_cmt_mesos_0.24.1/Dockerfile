@@ -2,12 +2,12 @@ FROM ubuntu-upstart:14.04
 MAINTAINER bplotka <bartlomiej.plotka@intel.com>
 
 # Install Dependencies
-RUN apt-get update -q --fix-missing
-RUN apt-get -qy install software-properties-common # (for add-apt-repository)
+RUN apt-get update -q --fix-missing && \
+    apt-get -qy install software-properties-common # (for add-apt-repository)
 RUN add-apt-repository ppa:george-edison55/cmake-3.x
-RUN apt-get update -q
-RUN apt-cache policy cmake
-RUN apt-get -qy install \
+RUN apt-get update -q && \
+    apt-cache policy cmake && \
+    apt-get -qy install \
   build-essential                         \
   autoconf                                \
   automake                                \
@@ -52,7 +52,7 @@ RUN mv protobuf.jar /usr/share/java/
 WORKDIR /mesos
 
 # Clone Mesos (master branch)
-RUN git clone git://github.com:Bplotka/mesos.git /mesos
+RUN git clone https://github.com/Bplotka/mesos.git /mesos
 RUN cd /mesos && git checkout perf-fix-0.24.1 && git log -n 1
 
 # Bootstrap
