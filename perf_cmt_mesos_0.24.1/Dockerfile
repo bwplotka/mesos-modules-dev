@@ -37,6 +37,7 @@ RUN apt-get update -q && \
   unzip                                   \
   clang-3.5                               \
   vim                                     \
+  libboost-python-dev                     \
   --no-install-recommends
 
 # Install the picojson headers
